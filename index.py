@@ -17,4 +17,9 @@ segment_pins = [15, 23, 24, 25, 8, 7, 12]
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
+for segment in SEGMENT_PINS:
+    GPIO.setup(segment, GPIO.OUT)
+    GPIO.output(segment, 0)
+
+
 # https://rydepier.wordpress.com/2016/05/30/l9110-fan-motor-keyes-board/
