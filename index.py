@@ -6,7 +6,13 @@ import RPI.GPIO as GPIO
 
 print("석현게이설")
 
-SEGMENT_PINS = [2, 3, 4, 5, 6, 7, 8]
+buzzer_pin = 2
+button_pin = 14
+switch_input_pin = 26
+led_red_pin = 21
+led_green_pin = 20
+led_blue_pin = 16
+segment_pins = [15, 23, 24, 25, 8, 7, 12]
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
