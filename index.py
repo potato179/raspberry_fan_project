@@ -12,7 +12,7 @@ switch_input_pin = 26
 led_red_pin = 21
 led_green_pin = 20
 led_blue_pin = 16
-segment_pins = [15, 23, 24, 25, 8, 7, 12]
+segment_pins = [15, 23, 24, 25, 21, 7, 12]
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
