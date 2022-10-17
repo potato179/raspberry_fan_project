@@ -26,6 +26,6 @@ for segment in SEGMENT_PINS:
 # 7세그 값 하나 올라갈 때 마다 부저 삑소리 올라감
 # RGB LED 켜졌을 때는 초록색 꺼졌을 때는 빨간색
 # 잠깐만
-# 버튼은 긴급정지
+# 
 
 # https://rydepier.wordpress.com/2016/05/30/l9110-fan-motor-keyes-board/
