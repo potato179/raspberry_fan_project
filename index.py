@@ -18,7 +18,7 @@ fan_vcc_pin = 4
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(buzzer_pin, GPIO.OUT)
 GPIO.setup(button_pin, GPIO.IN)
-GPIO.setup(switch_input_pin, GPIO.IN)
+GPIO.setup(switch_input_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(led_red_pin, GPIO.OUT)
 GPIO.setup(led_green_pin, GPIO.OUT)
 GPIO.setup(led_blue_pin, GPIO.OUT)
@@ -26,9 +26,6 @@ for segment in segment_pins:
     GPIO.setup(segment, GPIO.OUT)
     GPIO.output(segment, 0)
 GPIO.setup(fan_vcc_pin, GPIO.OUT)
-
-GPIO.setup(switch_input_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-
 GPIO.setwarnings(False)
 # switch를 켰을 때  카메라 on 상태
 # 상시로 가변저항 값 읽고 7 segments에 0~9 단위로 띄우기
