@@ -1,9 +1,16 @@
 import RPi.GPIO as GPIO
 import time
 
-# GPIO 7개 GPIO Pin 번호 설정
-#               A  B  C  D  E  F  G
+print("석현게이설")
+
+buzzer_pin = 2
+button_pin = 14
+switch_input_pin = 26
+led_red_pin = 21
+led_green_pin = 20
+led_blue_pin = 16
 segment_pins = [15, 23, 24, 25, 13, 7, 12]
+fan_vcc_pin = 4
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
