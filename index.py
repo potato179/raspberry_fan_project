@@ -56,15 +56,13 @@ try:
                 # gray스케일 이미지로 변환
                 #img = cv2.imread(frame)
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
                 # 이미지에서 얼굴 검출
                 faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-
                 # 얼굴 위치에 대한 좌표 정보 가져오기
                 for (x, y, w, h) in faces:
                     # 원본이미지에 얼굴 위치 표시
                     # (x,y) 에서 시작, 끝점(x+가로), (y+세로), BGR색, 굵기 2
-                    cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 2)
+                    cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
                     if(x):
                         print("True")
                     else:
@@ -76,7 +74,7 @@ try:
 
         # 0~7까지 8개의 채널에서 SPI 데이터 읽기
         def analog_read(channel):
-            ret = spi.xfer2([1, (8 + channel)<<4, 0])
+            ret = spi.xfer2([1, (8+channel) << 4, 0])
             adc_out = ((ret[1] & 3) << 8) + ret[2]
             return adc_out
 
