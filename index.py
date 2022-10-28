@@ -57,6 +57,10 @@ def analog_read(channel):
     adc_out = ((ret[1] & 3) << 8) + ret[2]
     return adc_out
 
+def print_7seg(gab):
+    for i in range(len(segment_pins)):
+        GPIO.output(segment_pins[i], data[gab][i])
+
 while True:
     # 0번 채널에서 읽어온 SPI 데이터(0~1023)
     reading = analog_read(0)
@@ -64,13 +68,3 @@ while True:
     # 전압수치로 변환
     voltage = reading * 5 / 1023
     print("Reading=%d, voltage=%f" % (reading/103, voltage))
-    time.sleep(0.1)
-
-try:
-    for i in range(10):
-        for j in range(len(segment_pins)):
-            GPIO.output(segment_pins[j], data[i][j])
-        time.sleep(1)
-finally:
-    GPIO.cleanup()
-    print("게이조이고")
