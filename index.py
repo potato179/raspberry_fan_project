@@ -43,15 +43,6 @@ data = [[1, 1, 1, 1, 1, 1, 0],  #0
         [1, 1, 1, 1, 1, 1, 1],  #8
         [1, 1, 1, 0, 0, 1, 1]]  #9
 
-GPIO.setup(BUZZER_PIN, GPIO.OUT)
-
-pwm = GPIO.PWM(BUZZER_PIN, 262)  #주파수 262 (도)
-pwm.start(10) #dutycycle 10 충분
-time.sleep(2)
-pwm.ChangeDutyCycle(0)
- 
-pwm.stop()
-
 try:
     for i in range(10):
         for j in range(len(segment_pins)):
