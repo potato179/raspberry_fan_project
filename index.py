@@ -62,9 +62,9 @@ while True:
     reading = analog_read(0)
     #reading = random.randrange(0,1024)
     # 전압수치로 변환
-    voltage = reading * 3.3 / 1023
-    print("Reading=%d, voltage=%f" % (reading, voltage))
-    time.sleep(0.8)
+    voltage = reading * 5 / 1023
+    print("Reading=%d, voltage=%f" % (reading/103, voltage))
+    time.sleep(0.1)
 
 try:
     for i in range(10):
