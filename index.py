@@ -8,9 +8,18 @@
 
 '''
 
+import imp
 import RPi.GPIO as GPIO
 import time
+import spidev
 
+spi = spidev.SpiDev()
+
+# SPI 통신 시작
+spi.open(0, 0)  # bus:0, dev:0 (CE0:0, CE1:1)
+
+# SPI 통신 속도 설정
+spi.max_speed_hz = 100000
 print("석현게이설")
 
 buzzer_pin = 2
