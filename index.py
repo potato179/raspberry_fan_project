@@ -46,8 +46,16 @@ data = [[1, 1, 1, 1, 1, 1, 0],  #0
 def analog_read(channel):
     ret = spi.xfer2([1, (8 + channel)<<4, 0])
     adc_out = ((ret[1] & 3) << 8) + ret[2]
-    print(adc_out)
     return adc_out
+
+while True:
+    # 0번 채널에서 읽어온 SPI 데이터(0~1023)
+    reading = analog_read(0)
+    #reading = random.randrange(0,1024)
+    # 전압수치로 변환
+    voltage = reading * 3.3 / 1023
+    print("Reading=%d, voltage=%f" % (reading, voltage))
+    time.sleep(0.8)
 
 try:
     for i in range(10):
