@@ -68,3 +68,4 @@ while True:
     # 전압수치로 변환
     voltage = reading * 5 / 1023
     print("Reading=%d, voltage=%f" % (reading/103, voltage))
+    print_7seg(int(reading/103))
