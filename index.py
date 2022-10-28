@@ -43,6 +43,12 @@ data = [[1, 1, 1, 1, 1, 1, 0],  #0
         [1, 1, 1, 1, 1, 1, 1],  #8
         [1, 1, 1, 0, 0, 1, 1]]  #9
 
+def analog_read(channel):
+    ret = spi.xfer2([1, (8 + channel)<<4, 0])
+    adc_out = ((ret[1] & 3) << 8) + ret[2]
+    print(adc_out)
+    return adc_out
+
 try:
     for i in range(10):
         for j in range(len(segment_pins)):
