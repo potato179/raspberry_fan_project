@@ -145,3 +145,7 @@ while True:
                 GPIO.output(buzzer_pin, GPIO.HIGH)
                 time.sleep(0.1)
                 GPIO.output(buzzer_pin, GPIO.LOW)
+    else:
+        GPIO.output(led_red_pin, GPIO.HIGH)
+        GPIO.output(led_green_pin, GPIO.HIGH)
+        GPIO.output(led_blue_pin, GPIO.HIGH)
