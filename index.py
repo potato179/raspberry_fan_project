@@ -32,6 +32,7 @@ PWM_pin = 5
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+GPIO.setup(switch_input_pin, GPIO.IN)
 GPIO.setup(led_red_pin, GPIO.OUT)
 GPIO.setup(led_green_pin, GPIO.OUT)
 GPIO.setup(led_blue_pin, GPIO.OUT)
@@ -79,18 +80,23 @@ while True:
     if int(reading/103)*10 == 0:
         pwm.stop()
         print(int(reading/103)*10)
-        GPIO.output(led_red_pin, GPIO.LOW)
-        GPIO.output(led_green_pin, GPIO.HIGH)
-        GPIO.output(led_blue_pin, GPIO.HIGH)
     elif int(reading/103)*10 == 1:
         pwm.start(10)
         print("ok start")
-        GPIO.output(led_red_pin, GPIO.HIGH)
-        GPIO.output(led_green_pin, GPIO.LOW)
-        GPIO.output(led_blue_pin, GPIO.HIGH)
     else: 
         pwm.ChangeDutyCycle(int(reading/103)*10 + 5)
         print("ok going")
-        GPIO.output(led_red_pin, GPIO.HIGH)
-        GPIO.output(led_green_pin, GPIO.LOW)
+
+    if int(reading/103) == 0:
+        GPIO.output(led_red_pin, GPIO.LOW)
+        GPIO.output(led_green_pin, GPIO.HIGH)
         GPIO.output(led_blue_pin, GPIO.HIGH)
+    else:
+        if GPIO.input(switch_input_pin):
+            GPIO.output(led_red_pin, GPIO.HIGH)
+            GPIO.output(led_green_pin, GPIO.LOW)
+            GPIO.output(led_blue_pin, GPIO.HIGH)
+        else:
+            GPIO.output(led_red_pin, GPIO.HIGH)
+            GPIO.output(led_green_pin, GPIO.HIGH)
+            GPIO.output(led_blue_pin, GPIO.LOW)
