@@ -32,6 +32,7 @@ PWM_pin = 5
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+GPIO.setup(buzzer_pin, GPIO.OUT)
 GPIO.setup(switch_input_pin, GPIO.IN)
 GPIO.setup(led_red_pin, GPIO.OUT)
 GPIO.setup(led_green_pin, GPIO.OUT)
@@ -83,6 +84,7 @@ while True:
     elif int(reading/103)*10 == 1:
         pwm.start(10)
         print("ok start")
+
     else: 
         pwm.ChangeDutyCycle(int(reading/103)*10 + 5)
         print("ok going")
@@ -100,3 +102,13 @@ while True:
             GPIO.output(led_red_pin, GPIO.HIGH)
             GPIO.output(led_green_pin, GPIO.HIGH)
             GPIO.output(led_blue_pin, GPIO.LOW)
+
+
+    cnt = 0
+
+    if int(reading/103) == 0:
+        if cnt == 0:
+            cnt = 1
+            GPIO.output(buzzer_pin, GPIO.HIGH)
+            time.sleep(0.1)
+            GPIO.output(buzzer_pin, GPIO.LOW)
