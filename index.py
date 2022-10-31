@@ -78,6 +78,7 @@ def print_7seg(gab):
 
 while True:
     if GPIO.input(switch_input_pin):
+        print(dnd_cnt)
         if dnd_cnt == 1:
             dnd_cnt = 0
         else:
@@ -95,7 +96,6 @@ while True:
     
     if int(reading/103)*10 == 0:
         pwm.stop()
-        print(int(reading/103)*10)
     elif int(reading/103)*10 == 1:
         pwm.start(10)
         print("ok start")
