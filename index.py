@@ -34,7 +34,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(PWM_pin, GPIO.OUT)
 
-pwm = GPIO.PWM(PWM_pin, 10000)
+pwm = GPIO.PWM(PWM_pin, 100)
 pwm.start(0)
 
 for segment in segment_pins:
