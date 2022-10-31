@@ -76,6 +76,7 @@ while True:
     if int(reading/103)*10 == 0:
         pwm.stop()
         print("ok stop")
+        GPIO.output(led_red_pin, GPIO.HIGH)
     elif int(reading/103)*10 == 1:
         pwm.start(10)
         print("ok start")
