@@ -106,7 +106,7 @@ while True:
 
     cnt = 0
 
-    if int(reading/103) == 0:
+    if int(reading/103) == 1:
         if cnt == 0:
             cnt = 1
             GPIO.output(buzzer_pin, GPIO.HIGH)
