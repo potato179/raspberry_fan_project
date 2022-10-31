@@ -37,7 +37,7 @@ dnd_cnt = 1
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(buzzer_pin, GPIO.OUT)
-GPIO.setup(button_pin, GPIO.IN, pull_up_down = GPIO.PU_DOWN)
+GPIO.setup(button_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(switch_input_pin, GPIO.IN)
 GPIO.setup(led_red_pin, GPIO.OUT)
 GPIO.setup(led_green_pin, GPIO.OUT)
