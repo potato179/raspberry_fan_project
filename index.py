@@ -28,9 +28,11 @@ led_green_pin = 20
 led_blue_pin = 16
 segment_pins = [15, 23, 24, 25, 13, 7, 12]
 fan_vcc_pin = 4
+PWM_pin = 5
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+GPIO.PWM(PWM_pin)
 
 for segment in segment_pins:
     GPIO.setup(segment, GPIO.OUT)
