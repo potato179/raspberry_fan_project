@@ -32,6 +32,7 @@ PWM_pin = 5
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+GPIO.setup(PWM_pin, GPIO.OUT)
 
 pwm = GPIO.PWM(PWM_pin, 100)
 pwm.start(0)
