@@ -83,6 +83,7 @@ while True:
             dnd_cnt = 0
         else:
             dnd_cnt = 1
+        time.sleep(0.1)
     # 0번 채널에서 읽어온 SPI 데이터(0~1023)
     reading = analog_read(0)
     #reading = random.randrange(0,1024)
