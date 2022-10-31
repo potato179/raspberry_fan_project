@@ -32,6 +32,9 @@ PWM_pin = 5
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+GPIO.setup(led_red_pin, GPIO.OUT)
+GPIO.setup(led_green_pin, GPIO.OUT)
+GPIO.setup(led_blue_pin, GPIO.OUT)
 GPIO.setup(PWM_pin, GPIO.OUT)
 
 pwm = GPIO.PWM(PWM_pin, 100000)
