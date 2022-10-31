@@ -30,7 +30,8 @@ segment_pins = [15, 23, 24, 25, 13, 7, 12]
 fan_vcc_pin = 4
 PWM_pin = 5
 
-cnt = 0
+buzzer_cnt = 0
+led_cnt = 0
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -106,14 +107,27 @@ while True:
             GPIO.output(led_blue_pin, GPIO.LOW)
 
     if int(reading/103) == 1:
-        if cnt == 0:
-            cnt = 1
+        if buzzer_cnt == 0:
+            buzzer_cnt = 1
             GPIO.output(buzzer_pin, GPIO.HIGH)
             time.sleep(0.1)
             GPIO.output(buzzer_pin, GPIO.LOW)
-    if int(reading/103) == 0:
-        if cnt == 1:
-            cnt = 0
+    elif int(reading/103) == 0:
+        if buzzer_cnt == 1:
+            buzzer_cnt = 0
+            GPIO.output(buzzer_pin, GPIO.HIGH)
+            time.sleep(0.1)
+            GPIO.output(buzzer_pin, GPIO.LOW)
+
+    if GPIO.input(switch_input_pin):
+        if led_cnt == 0:
+            led_cnt = 1
+            GPIO.output(buzzer_pin, GPIO.HIGH)
+            time.sleep(0.1)
+            GPIO.output(buzzer_pin, GPIO.LOW)
+    else:
+        if led_cnt == 1:
+            led_cnt = 0
             GPIO.output(buzzer_pin, GPIO.HIGH)
             time.sleep(0.1)
             GPIO.output(buzzer_pin, GPIO.LOW)
