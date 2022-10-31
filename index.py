@@ -111,3 +111,9 @@ while True:
             GPIO.output(buzzer_pin, GPIO.HIGH)
             time.sleep(0.1)
             GPIO.output(buzzer_pin, GPIO.LOW)
+    if int(reading/103) == 0:
+        if cnt == 1:
+            cnt = 0
+            GPIO.output(buzzer_pin, GPIO.HIGH)
+            time.sleep(0.1)
+            GPIO.output(buzzer_pin, GPIO.LOW)
