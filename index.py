@@ -32,10 +32,12 @@ PWM_pin = 5
 
 buzzer_cnt = 0
 led_cnt = 0
+dnd_cnt = 1
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(buzzer_pin, GPIO.OUT)
+GPIO.setup(button_pin, GPIO.IN)
 GPIO.setup(switch_input_pin, GPIO.IN)
 GPIO.setup(led_red_pin, GPIO.OUT)
 GPIO.setup(led_green_pin, GPIO.OUT)
@@ -61,7 +63,8 @@ data = [
     [1, 0, 1, 1, 1, 1, 1], #6
     [1, 1, 1, 0, 0, 0, 0], #7
     [1, 1, 1, 1, 1, 1, 1], #8
-    [1, 1, 1, 0, 0, 1, 1] #9
+    [1, 1, 1, 0, 0, 1, 1], #9
+    [0, 0, 0, 0, 0, 0, 0] #야간모드
 ]
 
 def analog_read(channel):
@@ -74,12 +77,21 @@ def print_7seg(gab):
         GPIO.output(segment_pins[i], data[gab][i])
 
 while True:
+    if GPIO.input(switch_input_pin):
+        if dnd_cnt == 1:
+            dnd_cnt = 0
+        else:
+            dnd_cnt = 1
     # 0번 채널에서 읽어온 SPI 데이터(0~1023)
     reading = analog_read(0)
     #reading = random.randrange(0,1024)
     # 전압수치로 변환
     voltage = reading * 5 / 1023
-    print_7seg(int(reading/103))
+    if dnd_cnt == 1:
+        print_7seg(int(reading/103))
+    else:
+        print_7seg(10)
+
     
     if int(reading/103)*10 == 0:
         pwm.stop()
