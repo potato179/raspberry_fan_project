@@ -71,6 +71,11 @@ while True:
     #reading = random.randrange(0,1024)
     # 전압수치로 변환
     voltage = reading * 5 / 1023
-    print(int(reading/103)*10)
     print_7seg(int(reading/103))
-    pwm.ChangeDutyCycle(int(reading/103)*10)
+    
+    if int(reading/103)*10 == 0:
+        pwm.stop()
+    elif int(reading/103)*10 == 1:
+        pwm.start(10)
+    else: 
+        pwm.ChangeDutyCycle(int(reading/103)*10)
