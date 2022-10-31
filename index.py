@@ -78,5 +78,7 @@ while True:
         print("ok stop")
     elif int(reading/103)*10 == 1:
         pwm.start(10)
+        print("ok start")
     else: 
         pwm.ChangeDutyCycle(int(reading/103)*10 + 5)
+        print("ok going")
