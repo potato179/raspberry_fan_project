@@ -105,42 +105,43 @@ while True:
         pwm.ChangeDutyCycle(int(reading/103)*10 + 5)
         print("ok going")
 
-    if int(reading/103) == 0:
-        GPIO.output(led_red_pin, GPIO.LOW)
-        GPIO.output(led_green_pin, GPIO.HIGH)
-        GPIO.output(led_blue_pin, GPIO.HIGH)
-    else:
-        if GPIO.input(switch_input_pin):
-            GPIO.output(led_red_pin, GPIO.HIGH)
-            GPIO.output(led_green_pin, GPIO.LOW)
+    if dnd_cnt == 1:
+        if int(reading/103) == 0:
+            GPIO.output(led_red_pin, GPIO.LOW)
+            GPIO.output(led_green_pin, GPIO.HIGH)
             GPIO.output(led_blue_pin, GPIO.HIGH)
         else:
-            GPIO.output(led_red_pin, GPIO.HIGH)
-            GPIO.output(led_green_pin, GPIO.HIGH)
-            GPIO.output(led_blue_pin, GPIO.LOW)
+            if GPIO.input(switch_input_pin):
+                GPIO.output(led_red_pin, GPIO.HIGH)
+                GPIO.output(led_green_pin, GPIO.LOW)
+                GPIO.output(led_blue_pin, GPIO.HIGH)
+            else:
+                GPIO.output(led_red_pin, GPIO.HIGH)
+                GPIO.output(led_green_pin, GPIO.HIGH)
+                GPIO.output(led_blue_pin, GPIO.LOW)
 
-    if int(reading/103) == 1:
-        if buzzer_cnt == 0:
-            buzzer_cnt = 1
-            GPIO.output(buzzer_pin, GPIO.HIGH)
-            time.sleep(0.1)
-            GPIO.output(buzzer_pin, GPIO.LOW)
-    elif int(reading/103) == 0:
-        if buzzer_cnt == 1:
-            buzzer_cnt = 0
-            GPIO.output(buzzer_pin, GPIO.HIGH)
-            time.sleep(0.1)
-            GPIO.output(buzzer_pin, GPIO.LOW)
+        if int(reading/103) == 1:
+            if buzzer_cnt == 0:
+                buzzer_cnt = 1
+                GPIO.output(buzzer_pin, GPIO.HIGH)
+                time.sleep(0.1)
+                GPIO.output(buzzer_pin, GPIO.LOW)
+        elif int(reading/103) == 0:
+            if buzzer_cnt == 1:
+                buzzer_cnt = 0
+                GPIO.output(buzzer_pin, GPIO.HIGH)
+                time.sleep(0.1)
+                GPIO.output(buzzer_pin, GPIO.LOW)
 
-    if GPIO.input(switch_input_pin):
-        if led_cnt == 0:
-            led_cnt = 1
-            GPIO.output(buzzer_pin, GPIO.HIGH)
-            time.sleep(0.1)
-            GPIO.output(buzzer_pin, GPIO.LOW)
-    else:
-        if led_cnt == 1:
-            led_cnt = 0
-            GPIO.output(buzzer_pin, GPIO.HIGH)
-            time.sleep(0.1)
-            GPIO.output(buzzer_pin, GPIO.LOW)
+        if GPIO.input(switch_input_pin):
+            if led_cnt == 0:
+                led_cnt = 1
+                GPIO.output(buzzer_pin, GPIO.HIGH)
+                time.sleep(0.1)
+                GPIO.output(buzzer_pin, GPIO.LOW)
+        else:
+            if led_cnt == 1:
+                led_cnt = 0
+                GPIO.output(buzzer_pin, GPIO.HIGH)
+                time.sleep(0.1)
+                GPIO.output(buzzer_pin, GPIO.LOW)
