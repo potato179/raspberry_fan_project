@@ -77,7 +77,7 @@ def print_7seg(gab):
         GPIO.output(segment_pins[i], data[gab][i])
 
 while True:
-    if GPIO.input(switch_input_pin):
+    if GPIO.input(button_pin):
         print(dnd_cnt)
         if dnd_cnt == 1:
             dnd_cnt = 0
