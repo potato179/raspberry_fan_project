@@ -207,6 +207,27 @@ try:
         time.sleep(0.2)   #입력 시간을 늘려서 오류 방지
 
 
+
+
+
+
+        #팬이 펴지고 꺼질 때 소리내기
+        if int_reading == 1:
+            if buzzer_cnt == 0:
+                buzzer_cnt = 1
+                buzzer_beep()
+        elif int_reading == 0:
+            if buzzer_cnt == 1:
+                buzzer_cnt = 0
+                buzzer_beep()
+
+
+
+
+
+
+
+
         if dnd_cnt == 1: #야간 모드가 아닐 때
             #7segment에 fan세기 띄우기
             print_7seg(int_reading)
@@ -243,12 +264,6 @@ try:
         else:   #야간모드 켜질 시 LED모두 꺼짐 및 소리 모두 꺼짐
             led_off()
             print_7seg(10) #7segment 끄기
-
-
-
-
-
-
 
 
 finally:
