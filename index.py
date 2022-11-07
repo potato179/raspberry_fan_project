@@ -3,14 +3,14 @@ import time
 import spidev
 import cv2
 
-#spi 변수 선언
+# spi 변수 선언
 spi = spidev.SpiDev()
 # SPI 통신 시작
 spi.open(0, 0)  # bus:0, dev:0
 # SPI 통신 속도 설정
 spi.max_speed_hz = 100000
 
-#GPIO 핀번호 설정
+# GPIO 핀번호 설정
 buzzer_pin = 2
 button_pin = 14
 switch_input_pin = 26
@@ -193,7 +193,7 @@ try:
         #야간 모드 버튼 클릭 여부 확인
         #dnd_cnt가 0이면 야간모드, 1이면 일반모드
         if GPIO.input(button_pin):
-            #print(dnd_cnt)
+            #print(dnd_cnt) 
             if dnd_cnt == 1:
                 dnd_cnt = 0
                 #return 1
