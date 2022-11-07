@@ -121,10 +121,10 @@ def pwmm():
         print("mcp 0")
     elif int_reading == 1:
         pwm.start(0)
-        pwm.ChangeDutyCycle(1)
+        pwm.ChangeDutyCycle(10)
         print("mcp 1")
     else: 
-        pwm.ChangeDutyCycle(int_reading)
+        pwm.ChangeDutyCycle(int_reading*10+10)
         print("mcp more than 1")
 
 #야간 모드 확인 함수
@@ -133,7 +133,7 @@ def pwmm():
     
 def buzzer_beep():
     GPIO.output(buzzer_pin, GPIO.HIGH) #부져 켜기
-    time.sleep(0.1) #0.1초 쉬고
+    time.sleep(0.12) #0.1초 쉬고
     GPIO.output(buzzer_pin, GPIO.LOW)  #부져 끄기
 
 
@@ -243,7 +243,7 @@ try:
 
 
 
-
+        print(" ")
 
 
 
