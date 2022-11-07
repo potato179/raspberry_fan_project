@@ -43,7 +43,7 @@ for segment in segment_pins:
     GPIO.output(segment, 0)
 
 #pwm세팅
-pwm = GPIO.PWM(PWM_pin, 10)
+pwm = GPIO.PWM(PWM_pin, 100)
 pwm.start(0)
 
 #7segment 숫자 설정
@@ -117,15 +117,15 @@ def led_off():
 #pwm 제어 함수
 def pwmm():
     if int_reading == 0:
-        pwm.stop()
-        print("mcp 0")
+        pwm.ChangeDutyCycle(0)
+        print("mcp %d" %int_reading)
     elif int_reading == 1:
-        pwm.start(0)
         pwm.ChangeDutyCycle(10)
-        print("mcp 1")
+        print("mcp %d" %int_reading)
     else: 
         pwm.ChangeDutyCycle(int_reading*10+10)
-        print("mcp more than 1")
+        print("mcp %d" %int_reading)
+        print("duty %d" %(int_reading*10+10))
 
 #야간 모드 확인 함수
 #def night_mode(dnd_cnt):
@@ -174,7 +174,7 @@ try:
 
         
         #얼굴에 사각형 그려 띄우기
-        #face_rectengle()
+        face_rectengle()
 
         #pwm 설정
         pwmm()
