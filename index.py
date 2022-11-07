@@ -224,6 +224,7 @@ try:
             if int_reading == 1: #팬 세기가 1이라면
                 if buzzer_cnt == 0: #부져가 0이라면
                     buzzer_cnt = 1 #부져를 1로 바꾸고
+                    buzzer_beep()
 
             elif int_reading == 0: #아니고 만약 팬세기가 0이라면
                 if buzzer_cnt == 1: #부저가 1이라면
