@@ -18,7 +18,7 @@ led_red_pin = 21
 led_green_pin = 20
 led_blue_pin = 16
 segment_pins = [15, 23, 24, 25, 13, 7, 12]
-PWM_pin = 5
+PWM_pin = 19
 
 #사용될 변수 선언
 buzzer_cnt = 0 #
@@ -174,7 +174,7 @@ try:
 
         
         #얼굴에 사각형 그려 띄우기
-        face_rectengle()
+        #face_rectengle()
 
         #pwm 설정
         pwmm()
@@ -184,10 +184,6 @@ try:
         int_reading = int(reading/103)   #0~1023을 103으로 나눴을 때, 0~9 사이값이 나옴
             #test
         print("int_reading: %d" %int_reading)
-
-        
-
-
 
 
         #야간 모드 확인
