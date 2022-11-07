@@ -207,27 +207,6 @@ try:
         time.sleep(0.2)   #입력 시간을 늘려서 오류 방지
 
 
-
-
-
-
-        #팬이 펴지고 꺼질 때 소리내기
-        if int_reading == 1:
-            if buzzer_cnt == 0:
-                buzzer_cnt = 1
-                buzzer_beep()
-        elif int_reading == 0:
-            if buzzer_cnt == 1:
-                buzzer_cnt = 0
-                buzzer_beep()
-
-
-
-
-
-
-
-
         if dnd_cnt == 1: #야간 모드가 아닐 때
             #7segment에 fan세기 띄우기
             print_7seg(int_reading)
@@ -245,6 +224,7 @@ try:
             if int_reading == 1: #팬 세기가 1이라면
                 if buzzer_cnt == 0: #부져가 0이라면
                     buzzer_cnt = 1 #부져를 1로 바꾸고
+                    buzzer_beep()
 
             elif int_reading == 0: #아니고 만약 팬세기가 0이라면
                 if buzzer_cnt == 1: #부저가 1이라면
