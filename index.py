@@ -228,7 +228,7 @@ try:
                     led_cnt = 0 # led 0으로 바꾸고
                     buzzer_beep()
         
-        else:   # 야간모드 켜질 시 LED모두 꺼짐 및 소리 모두 꺼짐
+        else: # 야간모드 켜질 시 LED모두 꺼짐 및 소리 모두 꺼짐
             led_off()
             print_7seg(10) # 7segment 끄기
 
