@@ -87,7 +87,7 @@ def face_rectengle():
         # (x,y) 에서 시작, 끝점(x+가로), (y+세로), BGR색, 굵기 2
         cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0), 2)
 
-    # cv2.imshow('img', frame)
+    #cv2.imshow('img', frame)
     if cv2.waitKey(10) == 27:
         print('end')
 
@@ -130,10 +130,12 @@ def pwmm():
 #야간 모드 확인 함수
 #def night_mode(dnd_cnt):
 
+    
 def buzzer_beep():
     GPIO.output(buzzer_pin, GPIO.HIGH) #부져 켜기
     time.sleep(0.1) #0.1초 쉬고
     GPIO.output(buzzer_pin, GPIO.LOW)  #부져 끄기
+
 
 a = 0
 
@@ -241,6 +243,13 @@ try:
         else:   #야간모드 켜질 시 LED모두 꺼짐 및 소리 모두 꺼짐
             led_off()
             print_7seg(10) #7segment 끄기
+
+
+
+
+
+
+
 
 finally:
     cap.release()
