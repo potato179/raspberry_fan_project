@@ -127,7 +127,6 @@ def pwmm():
 
 # 야간 모드 확인 함수
 # def night_mode(dnd_cnt):
-
 def buzzer_beep():
     GPIO.output(buzzer_pin, GPIO.HIGH) # 부져 켜기
     time.sleep(0.12) # 0.1초 쉬고
