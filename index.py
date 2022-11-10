@@ -66,7 +66,6 @@ face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_fronta
 # 카메라 장치 열기
 cap = cv2.VideoCapture(0)
 
-
 # 아날로그 신호 읽는 함수
 def analog_read(channel):
     ret = spi.xfer2([1, (8 + channel)<<4, 0])
