@@ -61,7 +61,6 @@ data = [
     [0, 0, 0, 0, 0, 0, 0] # 야간모드
 ]
 
-
 # xml 분류기 파일 로그(카메라 얼굴 인식 기능)
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 # 카메라 장치 열기
@@ -130,19 +129,16 @@ def pwmm():
 # 야간 모드 확인 함수
 # def night_mode(dnd_cnt):
 
-    
 def buzzer_beep():
     GPIO.output(buzzer_pin, GPIO.HIGH) # 부져 켜기
     time.sleep(0.12) # 0.1초 쉬고
     GPIO.output(buzzer_pin, GPIO.LOW)  # 부져 끄기
-
 
 a = 0
 
 # 프로그램 실행을 위한 무한 반복문
 try:
     while True:
-
         print(a);
         time.sleep(0.5)
         a+=1
@@ -162,8 +158,8 @@ try:
 
         # 이미지에서 얼굴 검출
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-
-            # length가 0이면 감지 안된거
+        
+        # length가 0이면 감지 안된거
         print("face: %d" %len(faces))
 
         # 얼굴 인식 여부 확인
@@ -172,7 +168,6 @@ try:
         else:
             print("face X")
 
-        
         # 얼굴에 사각형 그려 띄우기
         face_rectengle()
 
@@ -185,11 +180,8 @@ try:
             # test
         print("int_reading: %d" %int_reading)
 
-
         # 야간 모드 확인
         # nm = night_mode(dnd_cnt)
-
-
         # 야간 모드 버튼 클릭 여부 확인
         # dnd_cnt가 0이면 야간모드, 1이면 일반모드
         if GPIO.input(button_pin):
@@ -201,7 +193,6 @@ try:
                 dnd_cnt = 1
                 # return 0
         time.sleep(0.2)   # 입력 시간을 늘려서 오류 방지
-
 
         if dnd_cnt == 1: # 야간 모드가 아닐 때
             # 7segment에 fan세기 띄우기
@@ -241,12 +232,7 @@ try:
             led_off()
             print_7seg(10) # 7segment 끄기
 
-
-
         print(" ")
-
-
-
 
 finally:
     cap.release()
