@@ -63,7 +63,7 @@ data = [
 
 
 # xml 분류기 파일 로그(카메라 얼굴 인식 기능)
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 # 카메라 장치 열기
 cap = cv2.VideoCapture(0)
 
@@ -87,9 +87,9 @@ def face_rectengle():
         # (x,y) 에서 시작, 끝점(x+가로), (y+세로), BGR색, 굵기 2
         cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
-    # cv2.imshow('img', frame)
+    # cv2.imshow("img", frame)
     if cv2.waitKey(10) == 27:
-        print('end')
+        print("end")
 
 # 빨간 LED 켜는 함수
 def red_on():
@@ -151,7 +151,7 @@ try:
         ret, frame = cap.read()
         # 입력 안됨 알림
         if not ret:
-            print('camera no signal')
+            print("camera no signal")
 
         # 입력받은 이미지 크기 재설정
         frame = cv2.resize(frame, (400,300))
@@ -168,9 +168,9 @@ try:
 
         # 얼굴 인식 여부 확인
         if(len(faces)):
-            print('face O')
+            print("face O")
         else:
-            print('face X')
+            print("face X")
 
         
         # 얼굴에 사각형 그려 띄우기
@@ -230,7 +230,7 @@ try:
             # 조건문(switch) 해석: 스위치카 꺼지거나 켜질 때 소리 내고, LED변수 값을 바꿔서 LED색 제어할 수 있도록 함
             if GPIO.input(switch_input_pin): # 스위치가 켜지면
                 if led_cnt == 0: # led 값이 0이면
-                    led_cnt = 1# led 1로 바꾸고
+                    led_cnt = 1 # led 1로 바꾸고
                     buzzer_beep()
             else:
                 if led_cnt == 1: # led 값이 1이면
