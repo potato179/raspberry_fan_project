@@ -138,6 +138,10 @@ try:
         #시간 출력 & 올리는 함수
         print(a)
         a+=1
+        
+        #
+        if a == 100:
+            exit()
 
         # 이미지 읽기
         ret, frame = cap.read()
