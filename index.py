@@ -85,7 +85,7 @@ def face_rectengle():
         # (x,y) 에서 시작, 끝점(x+가로), (y+세로), BGR색, 굵기 2
         cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
-    # cv2.imshow("img", frame)
+    cv2.imshow("img", frame)
     if cv2.waitKey(10) == 27:
         print("end")
 
@@ -115,15 +115,19 @@ def led_off():
 # pwm 제어 함수
 def pwmm():
     if int_reading == 0:
-        pwm.ChangeDutyCycle(0)
+        GPIO.output(PWM_pin, GPIO.LOW)
+        #pwm.ChangeDutyCycle(0)
         print("mcp %d" %int_reading)
-    elif int_reading == 1:
-        pwm.ChangeDutyCycle(10)
-        print("mcp %d" %int_reading)
-    else: 
-        pwm.ChangeDutyCycle(int_reading*10+10)
-        print("mcp %d" %int_reading)
-        print("duty %d" %(int_reading*10+10))
+
+    if int_reading >= 1:
+        GPIO.output(PWM_pin, GPIO.HIGH)
+        if int_reading == 1:
+            pwm.ChangeDutyCycle(10)
+            print("mcp %d" %int_reading)
+        else: 
+            pwm.ChangeDutyCycle(int_reading*10+10)
+            print("mcp %d" %int_reading)
+            print("duty %d" %(int_reading*10+10))
 
 # 야간 모드 확인 함수
 # def night_mode(dnd_cnt):
@@ -137,9 +141,9 @@ a = 0
 # 프로그램 실행을 위한 무한 반복문
 try:
     while True:
-        print(a);
-        time.sleep(0.5)
-        a+=1
+        print(a)        
+        if a == 100:
+            exit()
 
         # 이미지 읽기
         ret, frame = cap.read()
@@ -151,7 +155,7 @@ try:
         frame = cv2.resize(frame, (400,300))
 
         # gray스케일 이미지로 변환
-            # img = cv2.imread(frame)
+        #img = cv2.imread(frame)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         # 이미지에서 얼굴 검출
@@ -161,13 +165,16 @@ try:
         print("face: %d" %len(faces))
 
         # 얼굴 인식 여부 확인
-        if(len(faces)):
-            print("face O")
+        if GPIO.input(switch_input_pin):
+            face_rectengle()
+            if(len(faces)):
+                print("face O")
+                a = 0
+            else:
+                print("face X")
+                a += 1
         else:
-            print("face X")
-
-        # 얼굴에 사각형 그려 띄우기
-        face_rectengle()
+            a = 0
 
         # pwm 설정
         pwmm()
