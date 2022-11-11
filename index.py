@@ -26,6 +26,7 @@ led_cnt = 0 #
 dnd_cnt = 1 # 야간보드 버튼 변수
 nm = 1 # 야간모드 변수
 int_reading = 0 # 아날로그 값 한자리수로
+a = 0 # 시간 count 함수
 
 # GPIO세팅
 GPIO.setmode(GPIO.BCM)
@@ -127,16 +128,14 @@ def pwmm():
 # 피에조 부저 울리는 함수
 def buzzer_beep():
     GPIO.output(buzzer_pin, GPIO.HIGH) # 부져 켜기
-    time.sleep(0.12) # 0.12초 쉬고
+    time.sleep(0.1) # 0.1초 쉬고
     GPIO.output(buzzer_pin, GPIO.LOW)  # 부져 끄기
-
-a = 0
 
 # 프로그램 실행을 위한 무한 반복문
 try:
     while True:
 
-        #시간을 올리는 함수
+        #시간 출력 & 올리는 함수
         print(a)
         a+=1
 
@@ -151,16 +150,13 @@ try:
         frame = cv2.resize(frame, (400,300))
 
         # gray스케일 이미지로 변환
-            # img = cv2.imread(frame)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         # 이미지에서 얼굴 검출
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
         
-        # length가 0이면 감지 안된거
-        print("face: %d" %len(faces))
-
         # 얼굴 인식 여부 확인
+        # length가 0이면 감지 안된거
         if(len(faces)):
             print("face O")
         else:
@@ -169,29 +165,27 @@ try:
         # 얼굴에 사각형 그려 띄우기
         face_rectengle()
 
-        # pwm 설정
+        # 팬 pwm
         pwmm()
 
         # 아날로그 신호 읽어오기
         reading = analog_read(0)
         int_reading = int(reading/103)   # 0~1023을 103으로 나눴을 때, 0~9 사이값이 나옴
-            # test
-        print("int_reading: %d" %int_reading)
+        
+        # 팬 세기 출력
+        print("7seg_output: %d" %int_reading)
 
         # 야간 모드 확인
-        # nm = night_mode(dnd_cnt)
         # 야간 모드 버튼 클릭 여부 확인
         # dnd_cnt가 0이면 야간모드, 1이면 일반모드
         if GPIO.input(button_pin):
-            # print(dnd_cnt) 
             if dnd_cnt == 1:
                 dnd_cnt = 0
-                # return 1
             else:
                 dnd_cnt = 1
-                # return 0
-        time.sleep(0.2)   # 입력 시간을 늘려서 오류 방지
+        time.sleep(0.2)   # 입력 감지 시간을 늘려서 오류 방지
 
+        #야간모드 일 때 
         if dnd_cnt == 1: # 야간 모드가 아닐 때
             # 7segment에 fan세기 띄우기
             print_7seg(int_reading)
@@ -230,6 +224,7 @@ try:
             led_off()
             print_7seg(10) # 7segment 끄기
 
+        # 한줄 띄어쓰기
         print(" ")
 
 finally:
