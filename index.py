@@ -31,8 +31,8 @@ int_reading = 0 # 아날로그 값 한자리수로
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(buzzer_pin, GPIO.OUT)
-GPIO.setup(button_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(switch_input_pin, GPIO.IN) # pull_up_down = GPIO.PUD_DOWN
+GPIO.setup(button_pin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN) # 풀다운 저항 기능
+GPIO.setup(switch_input_pin, GPIO.IN)
 GPIO.setup(led_red_pin, GPIO.OUT)
 GPIO.setup(led_green_pin, GPIO.OUT)
 GPIO.setup(led_blue_pin, GPIO.OUT)
@@ -46,7 +46,7 @@ for segment in segment_pins:
 pwm = GPIO.PWM(PWM_pin, 100)
 pwm.start(0)
 
-# 7segment 숫자 설정
+# 7segment에 표시할 숫자 설정
 data = [
     [1, 1, 1, 1, 1, 1, 0], # 0
     [0, 1, 1, 0, 0, 0, 0], # 1
@@ -63,6 +63,7 @@ data = [
 
 # xml 분류기 파일 로그(카메라 얼굴 인식 기능)
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+
 # 카메라 장치 열기
 cap = cv2.VideoCapture(0)
 
@@ -72,12 +73,12 @@ def analog_read(channel):
     adc_out = ((ret[1] & 3) << 8) + ret[2]
     return adc_out
 
-# 7segment 켜는 함수
+# 7segment에 숫자 표시하는 함수
 def print_7seg(gab):
     for i in range(len(segment_pins)):
         GPIO.output(segment_pins[i], data[gab][i])
 
-# 얼굴에 사각형 그려서 띄우는 함수
+# 얼굴에 사각형 그려서 화면에 띄우는 함수
 def face_rectengle():
      # 얼굴 위치에 대한 좌표 정보 가져오기
     for (x, y, w, h) in faces:
@@ -107,23 +108,22 @@ def green_on():
     GPIO.output(led_green_pin, GPIO.LOW)
     GPIO.output(led_blue_pin, GPIO.HIGH)
 
+# LED 끄는 함수
 def led_off():
     GPIO.output(led_red_pin, GPIO.HIGH)
     GPIO.output(led_green_pin, GPIO.HIGH)
     GPIO.output(led_blue_pin, GPIO.HIGH)
 
-# pwm 제어 함수
+# 팬모터 pwm 제어 함수
 def pwmm():
     if int_reading == 0:
         pwm.ChangeDutyCycle(0)
-        print("mcp %d" %int_reading)
     elif int_reading == 1:
         pwm.ChangeDutyCycle(10)
-        print("mcp %d" %int_reading)
     else: 
         pwm.ChangeDutyCycle(int_reading*10+10)
-        print("mcp %d" %int_reading)
         print("duty %d" %(int_reading*10+10))
+    print("mcp %d" %int_reading)
 
 # 야간 모드 확인 함수
 # def night_mode(dnd_cnt):
